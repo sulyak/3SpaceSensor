@@ -1,4 +1,4 @@
-import threespace_api as th
+import api.threespace_api as th
 
 def main():
     devices = th.getComPorts()
@@ -6,7 +6,7 @@ def main():
     if not len(devices): return
     
     for i, device in enumerate(devices):
-        print("device #%d:" % i + 1)
+        print("device #{}:".format(i + 1))
         print("type: {}".format(device.dev_type))
         print("port: {}".format(device.com_port))
 

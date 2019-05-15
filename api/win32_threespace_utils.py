@@ -14,7 +14,7 @@ __authors__ = [
     '"Dan Morrison" <dmorrison@yeitechnology.com>',
 ]
 
-from threespace_utils import *
+from api.threespace_utils import *
 import struct
 # import serial
 # from serial.win32 import ULONG_PTR, is_64bit
