@@ -28,7 +28,7 @@ import os
 if os.name == 'nt': # sys.platform == 'win32':
     from win32_threespace_utils import *
 else:
-    from threespace_utils import *
+    from api.threespace_utils import *
     print("WARNING: No additional utils are loaded!!!!!!")
 
 ### Globals ###
