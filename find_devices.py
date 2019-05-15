@@ -1,4 +1,4 @@
-import threespace_api as th
+import api.threespace_api as th
 
 def main():
     devices = th.getComPorts()
