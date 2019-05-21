@@ -1,6 +1,6 @@
 /sensorvenv
 /.vscode
-*/__pycache__
+**/__pycache__
 
 [Ll]ibrary/
 [Ll]ogs/
