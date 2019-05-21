@@ -6,6 +6,9 @@
   ```pip install -r requirements.txt```
 - [x] 3-Space Drivers. Can be downloaded through the [3 Space Suite](https://yostlabs.com/yost-labs-3-space-sensor-software-suite/)
   
+## How to set up a Unity Project
+  
+
 ## Files:
   
   * find_devices.py
