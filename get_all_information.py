@@ -1,7 +1,7 @@
 from find_devices import display_devices
 import api.threespace_api as tss
 
-"""get gyro date from wired sensor
+"""get all data from wired sensor
 
 this is a test program to help test the interaction between unity and python
 """
@@ -23,14 +23,20 @@ def main():
         print("terminating the program...")
         return
     
+    # connect with first device found
     true_device = tss.TSWLSensor(wired[0].com_port)
     print("\n\nconnecting with device at com port %s..." % wired[0].com_port)
     print("press any key to continue")
     input()
 
+    # getting all data from sensor until CTRL-C is pressed
     try:
         while True:
-            print("%.2f %.2f %.2f" % true_device.getRawGyroscopeRate())
+            data = true_device.getAllRawComponentSensorData()
+            out = "[%f, %f, %f] --Gyro\n"\
+                  "[%f, %f, %f] --Accel\n"\
+                  "[%f, %f, %f] --Comp" % data
+            print(out)
     except KeyboardInterrupt:
         print("stopped")
             
