@@ -9,9 +9,8 @@ public class Client : MonoBehaviour
 {
     public Requester _requester;
     public Text text;
-    public string message, old;
-    public ArrayList history;
-    // Start is called before the first frame update
+    private string message, old;
+    private ArrayList history;
     void Start()
     {
         old = null;
@@ -20,7 +19,6 @@ public class Client : MonoBehaviour
         _requester.Start();
     }
 
-    // Update is called once per frame
     void Update()
     {
         message = _requester.getTeste();

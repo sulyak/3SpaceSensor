@@ -25,7 +25,7 @@ public class Requester : RunAbleThread
             while(true)
             {
                 Debug.Log("Sending GeneralRequest");
-                client.SendFrame("GeneralRequest");
+                client.SendFrame("getAllData");
                 string message = null;
                 bool gotMessage = false;
                 while (Running && !gotMessage)

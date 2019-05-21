@@ -34,10 +34,9 @@ def main():
     input()
 
     # connect to server
-    PORT = 5555
     context = zmq.Context()
     socket = context.socket(zmq.REP)
-    socket.bind("tcp://*" + PORT)
+    socket.bind("tcp://*:5559")
 
     try:
         while True:
@@ -45,12 +44,16 @@ def main():
             print("request received: %s" % message)
 
             # TODO diffrent answers from diffrent requests
-            if(message == "getAllData"):
+            if(message == b"getAllData"):
                 data = true_device.getAllRawComponentSensorData()
-                out = "[%f, %f, %f] --Gyro\n"\
-                    "[%f, %f, %f] --Accel\n"\
-                    "[%f, %f, %f] --Comp" % data
+                out = "[%.2f, %.2f, %.2f] --Gyro\n"\
+                    "[%.2f, %.2f, %.2f] --Accel\n"\
+                    "[%.2f, %.2f, %.2f] --Comp" % data
                 print("sending:\n" + out)
+
+                socket_out = "%.2f, %.2f, %.2f\n"\
+                    "%.2f, %.2f, %.2f\n"\
+                    "%.2f, %.2f, %.2f" % data
                 socket.send_string(out)
             else:
                 socket.send_string("unrecognized request")
