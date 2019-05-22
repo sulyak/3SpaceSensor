@@ -13,31 +13,16 @@ public class Client : MonoBehaviour
     private ArrayList history;
     void Start()
     {
-        old = null;
-        history = new ArrayList();
         _requester = new Requester();
         _requester.Start();
     }
 
     void Update()
     {
-        message = _requester.getTeste();
+        message = _requester.getGyro().ToString();
         text.text = message;
-        if(message != old)
-        {
-            old = message;
-            history.Add(message);
-        }
+        // Debug.Log(_requester.getGyro());
         // Debug.Log(_requester.getTeste());
-    }
-
-    public void onPress()
-    {
-        foreach(string msg in history)
-        {
-            text.text = msg;
-            Debug.Log(msg);
-        }
     }
 
     void onDestroy()
