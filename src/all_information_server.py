@@ -46,15 +46,15 @@ def main():
             # TODO diffrent answers from diffrent requests
             if(message == b"getAllData"):
                 data = true_device.getAllRawComponentSensorData()
-                out = "[%.2f, %.2f, %.2f] --Gyro\n"\
-                    "[%.2f, %.2f, %.2f] --Accel\n"\
-                    "[%.2f, %.2f, %.2f] --Comp" % data
+                out = "Gyro  [%.2f, %.2f, %.2f]\n"\
+                    "Accel [%.2f, %.2f, %.2f]\n"\
+                    "Comp  [%.2f, %.2f, %.2f]" % data
                 print("sending:\n" + out)
 
                 socket_out = "%.2f, %.2f, %.2f\n"\
                     "%.2f, %.2f, %.2f\n"\
                     "%.2f, %.2f, %.2f" % data
-                socket.send_string(out)
+                socket.send_string(socket_out)
             else:
                 socket.send_string("unrecognized request")
     except KeyboardInterrupt:
