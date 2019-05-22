@@ -55,6 +55,8 @@
         "**/*.csproj":true,
         "**/*.sln":true,
         "**/Plugins":true,
-        "**/Scenes":true
+        "**/Scenes":true,
+        "**/__pycache__": true,
+        "**/UnityProject/.vscode": true
     }
 }
