@@ -1,5 +1,4 @@
 /sensorvenv
-/.vscode
 **/__pycache__
 
 *.asset
