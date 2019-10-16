@@ -9,25 +9,30 @@ this is a test program to help test the interaction between unity and python
 def main():
     display_devices()
 
-    wired = []
+    dongles = []
     devices = tss.getComPorts()
-    # finding all wired sensors
-    # TODO add compatibility with dongles
+    # finding all dongles
     for device in devices:
-        if device.dev_type == "WL":
-            wired.append(device)
+        if device.dev_type == "DNG":
+            dongles.append(device)
     
-    # assert that there is a wired sensor to work with
-    if(not len(wired)):
-        print("please use a wired wireless sensor")
+    # assert that there is a dongle to work with
+    if(not len(dongles)):
+        print("please use a dongle")
         print("terminating the program...")
         return
     
-    # connect with first device found
-    true_device = tss.TSWLSensor(wired[0].com_port)
-    print("\n\nconnecting with device at com port %s..." % wired[0].com_port)
+    # connect with first dongle found
+    true_dongle = tss.TSDongle(dongles[0].com_port)
+    print("\n\nconnecting with dongle at com port %s..." % dongles[0].com_port)
     print("press any key to continue")
     input()
+
+    true_device = true_dongle[0]
+    if not true_device:
+        print("no wireless sensors were found")
+        print("terminating the program...")
+        return
 
     # getting all data from sensor until CTRL-C is pressed
     try:
