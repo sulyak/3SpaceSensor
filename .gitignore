@@ -2,6 +2,7 @@
 **/__pycache__
 
 *.asset
+*.bd
 
 [Ll]ibrary/
 [Ll]ogs/
