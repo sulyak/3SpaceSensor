@@ -1,7 +1,7 @@
 from find_devices import display_devices
 import api.threespace_api as tss
 
-"""get all data from wired sensor
+"""get all data from a single wired sensor
 """
 
 def main():
