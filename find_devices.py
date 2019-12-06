@@ -1,7 +1,7 @@
-import api.threespace_api as th
+import api.threespace_api as tss
 
 def display_devices():
-    devices = th.getComPorts()
+    devices = tss.getComPorts()
     print("%d device(s) found" % len(devices))
     if not len(devices): return
 
