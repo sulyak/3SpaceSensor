@@ -15,3 +15,4 @@
 ## TODO:
 
 - [ ] This
+- [ ] config_wireless.py needs physical sensor in order to test

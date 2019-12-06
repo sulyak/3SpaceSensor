@@ -4,10 +4,6 @@ import sys
 """this script pair one tss_dongle to one or more tss_wldevices
 """
 
-WIRELESS_CHANNEL = 26
-PAN_ID = 26
-INDEX = 0
-
 def main():
     devices = tss.getComPorts()
     print("%d device(s) found" % len(devices))
@@ -25,24 +21,30 @@ def main():
         print("please use at least one sensor")
         return
 
+    # get information from dongle
+    true_dongle = tss.TSDongle(dongles[0].com_port)
+    wl_channel = true_dongle.getWirelessChannel()
+    pan_id = true_dongle.getWirelessPanID()
+
+    # get current index based on how many slots are left
+    # TODO
+    # index = true_dongle.getWirelessSlotsOpen()
+    index = 0
+
     print("\n")
-    print("Changing Wireless Channels to %d" % WIRELESS_CHANNEL)
-    print("Chaning PAN ID's to %d" % PAN_ID)
-    print("Pairing sensor with index %d\n\n" % INDEX)
+    print("Changing Wireless Channels to %d" % wl_channel)
+    print("Chaning PAN ID's to %d" % pan_id)
+    print("Pairing sensor with index %d\n\n" % index)
     print("press any key to continue...")
     input()
 
-    true_dongle = tss.TSDongle(dongles[0].com_port)
-    true_dongle.setWirelessPanID(PAN_ID)
-    true_dongle.setWirelessChannel(WIRELESS_CHANNEL)
-    
     for i, sensor in enumerate(sensors):
         true_sensor = tss.TSWLSensor(sensor.com_port)
-        true_sensor.setWirelessPanID(PAN_ID)
-        true_sensor.setWirelessChannel(WIRELESS_CHANNEL)
+        true_sensor.setWirelessPanID(pan_id)
+        true_sensor.setWirelessChannel(wl_channel)
 
         # index of the paired list, default to zero
-        true_dongle.setSensorToDongle(INDEX + i, true_sensor.serial_number)
+        true_dongle.setSensorToDongle(index + i, true_sensor.serial_number)
         true_sensor.commitWirelessSettings()
 
     true_dongle.commitWirelessSettings()
