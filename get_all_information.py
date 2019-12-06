@@ -16,8 +16,8 @@ def main():
             wired.append(device)
     
     # assert that there is a wired sensor to work with
-    if(not len(wired)):
-        print("please use a wired wireless sensor")
+    if len(wired) != 1:
+        print("please use exactly one wired wireless sensor")
         print("terminating the program...")
         return
     
