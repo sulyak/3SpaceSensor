@@ -1,8 +1,7 @@
 import api.threespace_api as tss
 import sys
 
-"""
-this script pair one tss_dongle to one or more tss_wldevices
+"""this script pair one tss_dongle to one or more tss_wldevices
 """
 
 WIRELESS_CHANNEL = 26

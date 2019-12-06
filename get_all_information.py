@@ -2,8 +2,6 @@ from find_devices import display_devices
 import api.threespace_api as tss
 
 """get all data from wired sensor
-
-this is a test program to help test the interaction between unity and python
 """
 
 def main():
