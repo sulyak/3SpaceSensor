@@ -7,20 +7,16 @@ import api.threespace_api as tss
 def main():
     display_devices()
 
-    dongles = []
-    devices = tss.getComPorts()
     # finding all dongles
-    for device in devices:
-        if device.dev_type == "DNG":
-            dongles.append(device)
+    dongles = tss.getComPorts(filter=tss.TSS_FIND_DNG)
     
     # assert that there is a dongle to work with
-    if(not len(dongles)):
-        print("please use a dongle")
+    if len(dongles) != 1:
+        print("please use exactly one dongle")
         print("terminating the program...")
         return
     
-    # connect with first dongle found
+    # connect with dongle found
     true_dongle = tss.TSDongle(dongles[0].com_port)
     print("\n\nconnecting with dongle at com port %s..." % dongles[0].com_port)
     print("press any key to continue")
@@ -42,5 +38,7 @@ def main():
             print(out)
     except KeyboardInterrupt:
         print("stopped")
+    true_device.close()
+    true_dongle.close()
             
 if __name__ == "__main__": main()
