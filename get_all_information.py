@@ -7,13 +7,8 @@ import api.threespace_api as tss
 def main():
     display_devices()
 
-    wired = []
-    devices = tss.getComPorts()
     # finding all wired sensors
-    # TODO add compatibility with dongles
-    for device in devices:
-        if device.dev_type == "WL":
-            wired.append(device)
+    wired = tss.getComPorts(filter=tss.TSS_FIND_WL)
     
     # assert that there is a wired sensor to work with
     if len(wired) != 1:
