@@ -16,3 +16,5 @@
 
 - [ ] This
 - [ ] config_wireless.py needs physical sensor in order to test
+- [ ] store information in database
+- [ ] choose wich information will be stored (gyro, accel, etc)
