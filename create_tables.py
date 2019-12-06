@@ -2,28 +2,23 @@ from find_devices import display_devices
 import api.threespace_api as tss
 import time
 
-"""get all data from wired sensor
-
-this is a test program to help test the interaction between unity and python
+"""get wireless data from sensor 
+and saves in a database 
 """
 
 def main():
     display_devices()
 
-    dongles = []
-    devices = tss.getComPorts()
     # finding all dongles
-    for device in devices:
-        if device.dev_type == "DNG":
-            dongles.append(device)
-    
+    dongles = tss.getComPorts(tss.TSS_FIND_DNG)
+
     # assert that there is a dongle to work with
-    if not len(dongles):
-        print("please use a dongle")
+    if len(dongles) != 1:
+        print("please use exaclty one dongle")
         print("terminating the program...")
         return
     
-    # connect with first dongle found
+    # connect with dongle found
     true_dongle = tss.TSDongle(dongles[0].com_port)
     print("\n\nconnecting with dongle at com port %s..." % dongles[0].com_port)
     print("press any key to continue")
@@ -34,6 +29,12 @@ def main():
     for true_device in true_dongle:
         # print(true_device)
         if true_device: true_devices.append(true_device)
+
+    # make sure that there are sensor to work with
+    if not len(true_devices):
+        print("no wireless sensor found")
+        print("terminating the program")
+        return
 
     print("using %d wireless device(s)" % len(true_devices))
     print("press any key to continue...")
@@ -46,8 +47,7 @@ def main():
     except: t_len = 3
     if 3 < t_len > 60: t_len = 3
     print("recording for %d seconds..." % t_len)
-    time.sleep(2)
-
+    countdown(3)
     
     generate_table(true_devices, 3, t_len=t_len)
 
@@ -96,5 +96,11 @@ def generate_table(devices, mode, t_len=10):
         print("stopped")
 
     fp.close()
+
+def countdown(seconds):
+    for i in reversed(range(seconds)):
+        print(str(i) + "...")
+        time.sleep(1)
+    print("GO!")
 
 if __name__ == "__main__": main()
