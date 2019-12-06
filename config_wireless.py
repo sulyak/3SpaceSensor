@@ -39,21 +39,22 @@ def main():
     input()
 
     for i, sensor in enumerate(sensors):
+        # connect to the sensor
         true_sensor = tss.TSWLSensor(sensor.com_port)
+        # wireless settings
         true_sensor.setWirelessPanID(pan_id)
         true_sensor.setWirelessChannel(wl_channel)
 
+        # pairing the sensor to the dongle
         # index of the paired list, default to zero
         true_dongle.setSensorToDongle(index + i, true_sensor.serial_number)
         true_sensor.commitWirelessSettings()
 
+        # TODO
+        # condition if max sensor is reached
+
     true_dongle.commitWirelessSettings()
+    true_dongle.close()
     print("All done")
 
-if __name__ == "__main__":
-    try:
-        int(sys.argv[1])
-    except: pass
-    else:
-        INDEX = int(sys.argv[1])
-    main()
+if __name__ == "__main__": main()
