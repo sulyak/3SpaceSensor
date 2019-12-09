@@ -2,6 +2,10 @@ from find_devices import display_devices
 import api.threespace_api as tss
 import time
 
+# debug
+import parser
+import importlib
+
 """get wireless data from sensor 
 and saves in a database 
 """
@@ -56,14 +60,17 @@ def generate_table(devices, t_len=10):
     try:
         # run the recording for t_len seconds
         t_end = time.time() + t_len
-        while time.time() < t_end:
+        while time.time() < t_end or t_len == -1: # -1 debug tool for endless record
             # this is the mode with all 3 other function
             row = []
             for device in devices:
                 for func_name in function_names:
                     for data in getattr(device, func_name)():
                         row.append(data)
-            print(row)
+
+            # deal with the data collected
+            importlib.reload(parser)
+            parser.parse(row)
 
     except KeyboardInterrupt:
         print("stopped")
