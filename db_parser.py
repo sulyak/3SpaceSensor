@@ -1,9 +1,8 @@
 from datetime import datetime as dt
 
 def parse_to_query(row):
-    np.set_printoptions(precision=2)
-    # while len(row) < 27:
-    #    row.append(-99)
+    while len(row) < 153:
+        row.append(-99)
 
     row = map(PrettyFloat, row)
     row_data = ""
@@ -13,7 +12,9 @@ def parse_to_query(row):
         row_data += str(str_data) + " "
             
     # print(row_data)
-    return "insert into data values(%s, '%s')" % (dt.now(), row_data)
+    query = "insert into data values('%s', %s)" % (dt.now(), row_data)
+    # print(query)
+    return query
 
 class PrettyFloat(float):
     def __repr__(self):
