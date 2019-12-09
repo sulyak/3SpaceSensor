@@ -16,15 +16,21 @@ def init(con):
     query = """
     create table if not exists data
     (
-        girox   double,
-        giroy   double,
-        giroz   double
+        giro0x   double,
+        giro0y   double,
+        giro0z   double,
+        accel0x  double,
+        accel0y  double,
+        accel0z  double,
+        comp0x   double,
+        comp0y   double,
+        comp0z   double
     )
     """
     cursor.execute(query)
-    cursor.execute("insert into data values(12.3, 14.5, 16.5)")
-    cursor.execute("insert into data values(11.3, 13.5, 15.5)")
-    cursor.execute("insert into data values(10.3, 12.5, 14.5)")
+    cursor.execute("insert into data values(12.3, 14.5, 16.5, 17.0, 0, 0, 0, 0, 0)")
+    cursor.execute("insert into data values(11.3, 13.5, 15.5, 0, 0, 0, 0, 0, 0)")
+    cursor.execute("insert into data values(10.3, 12.5, 14.5, 0, 0, 0, 0, 0, 0)")
     remove_duplicated(con)
     con.commit()
 
