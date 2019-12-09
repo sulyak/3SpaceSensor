@@ -27,9 +27,8 @@ def main():
     pan_id = true_dongle.getWirelessPanID()
 
     # get current index based on how many slots are left
-    # TODO
-    # index = true_dongle.getWirelessSlotsOpen()
-    index = 0
+    # 15 is the max slots per dongle
+    index = 15 - true_dongle.getWirelessSlotsOpen()
 
     print("\n")
     print("Changing Wireless Channels to %d" % wl_channel)
@@ -38,7 +37,11 @@ def main():
     print("press any key to continue...")
     input()
 
-    for i, sensor in enumerate(sensors):
+    for sensor in sensors:
+        if not true_dongle.getWirelessSlotsOpen():
+            print("dongle reached its max capacity")
+            break
+
         # connect to the sensor
         true_sensor = tss.TSWLSensor(sensor.com_port)
         # wireless settings
@@ -47,11 +50,11 @@ def main():
 
         # pairing the sensor to the dongle
         # index of the paired list, default to zero
-        true_dongle.setSensorToDongle(index + i, true_sensor.serial_number)
+        true_dongle.setSensorToDongle(index, true_sensor.serial_number)
+        index += 1
+
         true_sensor.commitWirelessSettings()
 
-        # TODO
-        # condition if max sensor is reached
 
     true_dongle.commitWirelessSettings()
     true_dongle.close()
