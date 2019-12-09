@@ -2,13 +2,18 @@ from find_devices import display_devices
 import api.threespace_api as tss
 import time
 
+import sqlite3 as sql
+
 # debug
-import parser
+import db_parser
 import importlib
+
+import db
 
 """get wireless data from sensor 
 and saves in a database 
 """
+
 
 def main():
     display_devices()
@@ -53,9 +58,13 @@ def main():
     print("recording for %d seconds..." % t_len)
     countdown(3)
     
-    generate_table(true_devices, t_len=t_len)
+    generate_table(true_devices, t_len=-1)
+    print("stopped")
 
 def generate_table(devices, t_len=10):
+    con = db.init("TSS.db")
+    cursor = con.cursor()
+
     function_names = ["getRawGyroscopeRate", "getRawAccelerometerData", "getRawCompassData"]
     try:
         # run the recording for t_len seconds
@@ -67,13 +76,21 @@ def generate_table(devices, t_len=10):
                 for func_name in function_names:
                     for data in getattr(device, func_name)():
                         row.append(data)
+            time.sleep(.5)
 
             # deal with the data collected
-            importlib.reload(parser)
-            parser.parse(row)
+            importlib.reload(db_parser)
+            try:
+                query = db_parser.parse_to_query(row)
+            except Exception as e:
+                print(e)
+            else:
+                cursor.execute(query)
 
     except KeyboardInterrupt:
         print("stopped")
+
+    con.commit()
 
 
 def countdown(seconds):
