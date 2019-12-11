@@ -5,6 +5,7 @@
 
   ```pip install -r requirements.txt```
 - [x] 3-Space Drivers. Can be downloaded through the [3 Space Suite](https://yostlabs.com/yost-labs-3-space-sensor-software-suite/)
+- [x] db visualizer. [sqlitebrowser](https://sqlitebrowser.org/) 
   
 
 ## Files:
