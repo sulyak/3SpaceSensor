@@ -14,6 +14,7 @@ def main():
     if len(dongles) != 1:
         print("please use exactly one dongle")
         print("terminating the program...")
+        input()
         return
     
     # connect with dongle found
@@ -26,6 +27,7 @@ def main():
     if not true_device:
         print("no wireless sensors were found")
         print("terminating the program...")
+        input()
         return
 
     # getting all data from sensor until CTRL-C is pressed

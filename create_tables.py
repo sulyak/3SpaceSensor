@@ -25,6 +25,7 @@ def main():
     if len(dongles) != 1:
         print("please use exaclty one dongle")
         print("terminating the program...")
+        input()
         return
     
     # connect with dongle found
@@ -43,6 +44,7 @@ def main():
     if not len(true_devices):
         print("no wireless sensor found")
         print("terminating the program")
+        input()
         return
 
     print("using %d wireless device(s)" % len(true_devices))

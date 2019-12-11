@@ -9,6 +9,8 @@ def main():
     print("%d device(s) found" % len(devices))
     if not len(devices):
         print("Zero devices found")
+        print("terminating the program...")
+        input()
         return
     
     dongles = tss.getComPorts(tss.TSS_FIND_DNG)

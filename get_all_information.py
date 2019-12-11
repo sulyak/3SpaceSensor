@@ -14,6 +14,7 @@ def main():
     if len(wired) != 1:
         print("please use exactly one wired wireless sensor")
         print("terminating the program...")
+        input()
         return
     
     # connect with first device found
